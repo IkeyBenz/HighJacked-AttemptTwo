@@ -11,21 +11,10 @@ import Foundation
 class ReverseHelicopter: CCSprite {
 
     var move: CCActionMoveTo!
-    var heliSpeed: Double = 5
     
     var screenWidth = UIScreen.mainScreen().bounds.width
     
-    func moveHelicopter() {
-        
-        if Enemy.score > 25 {
-            heliSpeed = 4.5
-        } else if Enemy.score > 75 {
-            heliSpeed = 4
-        } else if Enemy.score > 125 {
-            heliSpeed = 3.5
-        } else if Enemy.score > 150 {
-            heliSpeed = 3
-        }
+    func moveHelicopter(heliSpeed: Double) {
         
         var callblock = CCActionCallBlock(block: {self.checkForEnemies()})
         move = CCActionMoveTo(duration: heliSpeed, position: ccp(CGFloat(Double(screenWidth) + Double(contentSizeInPoints.width / 2) * Double(scale)), position.y))
