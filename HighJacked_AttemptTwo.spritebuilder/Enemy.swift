@@ -16,8 +16,10 @@ class Enemy: CCSprite, CCPhysicsCollisionDelegate {
         
     }
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
-        Enemy.score += 5
+        var randomScoreIncrease = arc4random_uniform(5)
+        Enemy.score += Int(randomScoreIncrease)
         removeFromParent()
+        
     }
 
 }

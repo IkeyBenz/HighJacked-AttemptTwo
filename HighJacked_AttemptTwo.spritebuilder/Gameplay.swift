@@ -11,86 +11,116 @@ import Foundation
 class Gameplay: CCScene/*, EnemyDelegate*/ {
     
     weak var scoreLabel: CCLabelTTF!
+   
+    
+    
     
     override func update(delta: CCTime) {
         scoreLabel.string = String(Enemy.score)
         updatedHeliScale()
         updatedHeliSpeed()
+        updatedHeliSpawn()
         
         var randomSpawn = arc4random_uniform(1000)
         var randomReverseSpawn = arc4random_uniform(1000)
         
-        if randomSpawn < 5 {
-            showHelicopters(updatedHeliScale(), speed: updatedHeliSpeed())
-        } else if randomReverseSpawn < 5 {
-            showReverseHelicopters(updatedHeliScale(), speed: updatedHeliSpeed())
+        if randomSpawn < updatedHeliSpawn() {
+            showHelicopters(updatedHeliScale(), heliSpeed: updatedHeliSpeed())
+        } else if randomReverseSpawn < updatedHeliSpawn() {
+            showReverseHelicopters(updatedHeliScale(), heliSpeed: updatedHeliSpeed())
         }
         
         
     }
     
-    func showHelicopters(heliScale: Float, speed: Double) {
-        println(heliScale)
+    func showHelicopters(heliScale: Double, heliSpeed: Double) {
+        
+        println(heliSpeed)
         
         var helicopter = CCBReader.load("Helicopter") as! Helicopter
         
         var randomHeight = arc4random_uniform(190) + 100
         
-        helicopter.scale = heliScale
+        helicopter.scale = Float(heliScale)
         helicopter.position = CGPoint(x: CGFloat(600), y: CGFloat(randomHeight))
         addChild(helicopter)
         
         
-        helicopter.moveHelicopter(speed)
+        helicopter.moveHelicopter(heliSpeed)
         
         
     }
     
-    func showReverseHelicopters(heliScale: Float, speed: Double) {
-        println("\(heliScale) reverse")
+    func showReverseHelicopters(heliScale: Double, heliSpeed: Double) {
         
+        println("\(heliSpeed) reverse")
         var reverseHelicopter = CCBReader.load("ReverseHelicopter") as! ReverseHelicopter
         
         var randomHeight = arc4random_uniform(190) + 100
         
-        reverseHelicopter.scale = heliScale
+        reverseHelicopter.scale = Float(heliScale)
         reverseHelicopter.position = CGPoint(x: -100, y: CGFloat(randomHeight))
         addChild(reverseHelicopter)
         
-        reverseHelicopter.moveHelicopter(speed)
+        reverseHelicopter.moveHelicopter(heliSpeed)
     }
     
-    func updatedHeliScale() -> Float {
-        var currentHelicopterScale: Float = 3.0
+    func updatedHeliScale() -> Double {
+        var currentHelicopterScale: Double!
         
-        if Enemy.score > 10 && Enemy.score < 20 {
+        currentHelicopterScale = 3.0
+        if Enemy.score >= 20 {
+            currentHelicopterScale = 2.7
+        } else if Enemy.score >= 100 {
             currentHelicopterScale = 2.5
-        } else if Enemy.score > 20 && Enemy.score < 30 {
-            currentHelicopterScale = 2.0
-        } else if Enemy.score > 30 && Enemy.score < 40 {
-            currentHelicopterScale = 1.5
-        } else if Enemy.score > 40 && Enemy.score < 50 {
+        } else if Enemy.score >= 200 {
+            currentHelicopterScale = 2
+        } else if Enemy.score >= 300 {
+            currentHelicopterScale = 1.7
+        } else if Enemy.score >= 400 {
+            currentHelicopterScale = 1.3
+        } else if Enemy.score >= 450 {
             currentHelicopterScale = 1
-        } else if Enemy.score > 60 && Enemy.score < 60 {
-            currentHelicopterScale = 0.5
         }
         
         return currentHelicopterScale
     }
     
-    var speed: Double = 5
     func updatedHeliSpeed() -> Double {
-        
-        if Enemy.score > 10 {
+        var speed: Double = 5
+        if Enemy.score >= 20 {
             speed = 4.5
-        } else if Enemy.score > 20 {
+        } else if Enemy.score >= 100 {
+            speed = 4.2
+        } else if Enemy.score >= 200 {
             speed = 4
-        } else if Enemy.score > 125 {
-            speed = 3.5
-        } else if Enemy.score > 150 {
+        } else if Enemy.score >= 300 {
+            speed = 3.7
+        } else if Enemy.score >= 400 {
+            speed = 3.2
+        } else if Enemy.score >= 450 {
             speed = 3
         }
         return speed
+    }
+    
+    func updatedHeliSpawn() -> UInt32 {
+        var randomSpawnProbability: UInt32 = 5
+        if Enemy.score >= 20 {
+            randomSpawnProbability = 6
+        } else if Enemy.score >= 100 {
+            randomSpawnProbability = 7
+        } else if Enemy.score >= 200 {
+            randomSpawnProbability = 8
+        } else if Enemy.score >= 300 {
+            randomSpawnProbability = 9
+        } else if Enemy.score >= 400 {
+            randomSpawnProbability = 10
+        } else if Enemy.score >= 450 {
+            randomSpawnProbability = 11
+        }
+        
+        return randomSpawnProbability
     }
     
 }

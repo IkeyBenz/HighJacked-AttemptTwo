@@ -25,7 +25,7 @@ class ReverseHelicopter: CCSprite {
         var doesHaveEnemies: Bool!
         if children.count > 1 {
             triggerGameOver()
-        } else if children.count == 1 {
+        } else {
             removeFromParent()
         }
     }
