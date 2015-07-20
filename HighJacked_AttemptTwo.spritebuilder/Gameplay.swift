@@ -69,15 +69,15 @@ class Gameplay: CCScene/*, EnemyDelegate*/ {
         var currentHelicopterScale: Double!
         
         currentHelicopterScale = 3.0
-        if Enemy.score >= 20 {
+        if Enemy.score >= 20 && Enemy.score < 100 {
             currentHelicopterScale = 2.7
-        } else if Enemy.score >= 100 {
+        } else if Enemy.score >= 100 && Enemy.score < 200 {
             currentHelicopterScale = 2.5
-        } else if Enemy.score >= 200 {
+        } else if Enemy.score >= 200 && Enemy.score < 300 {
             currentHelicopterScale = 2
-        } else if Enemy.score >= 300 {
+        } else if Enemy.score >= 300 && Enemy.score < 400 {
             currentHelicopterScale = 1.7
-        } else if Enemy.score >= 400 {
+        } else if Enemy.score >= 400 && Enemy.score < 450 {
             currentHelicopterScale = 1.3
         } else if Enemy.score >= 450 {
             currentHelicopterScale = 1
@@ -87,16 +87,19 @@ class Gameplay: CCScene/*, EnemyDelegate*/ {
     }
     
     func updatedHeliSpeed() -> Double {
-        var speed: Double = 5
-        if Enemy.score >= 20 {
+        var speed: Double!
+        if Enemy.score >= 0 && Enemy.score < 20 {
+            speed = 5
+        }
+        if Enemy.score >= 20 && Enemy.score < 100 {
             speed = 4.5
-        } else if Enemy.score >= 100 {
+        } else if Enemy.score >= 100 && Enemy.score < 200 {
             speed = 4.2
-        } else if Enemy.score >= 200 {
+        } else if Enemy.score >= 200 && Enemy.score < 300 {
             speed = 4
-        } else if Enemy.score >= 300 {
+        } else if Enemy.score >= 300 && Enemy.score < 400 {
             speed = 3.7
-        } else if Enemy.score >= 400 {
+        } else if Enemy.score >= 400 && Enemy.score < 450 {
             speed = 3.2
         } else if Enemy.score >= 450 {
             speed = 3
@@ -106,15 +109,15 @@ class Gameplay: CCScene/*, EnemyDelegate*/ {
     
     func updatedHeliSpawn() -> UInt32 {
         var randomSpawnProbability: UInt32 = 5
-        if Enemy.score >= 20 {
-            randomSpawnProbability = 6
-        } else if Enemy.score >= 100 {
+        if Enemy.score >= 20 && Enemy.score < 100 {
             randomSpawnProbability = 7
-        } else if Enemy.score >= 200 {
+        } else if Enemy.score >= 100 && Enemy.score < 200 {
+            randomSpawnProbability = 7
+        } else if Enemy.score >= 200 && Enemy.score < 300 {
             randomSpawnProbability = 8
-        } else if Enemy.score >= 300 {
+        } else if Enemy.score >= 300 && Enemy.score < 400 {
             randomSpawnProbability = 9
-        } else if Enemy.score >= 400 {
+        } else if Enemy.score >= 400 && Enemy.score < 450 {
             randomSpawnProbability = 10
         } else if Enemy.score >= 450 {
             randomSpawnProbability = 11
