@@ -8,13 +8,15 @@
 
 import Foundation
 
-class Gameplay: CCScene {
+class Gameplay: CCScene, CCPhysicsCollisionDelegate {
     
     weak var scoreLabel: CCLabelTTF!
     weak var gamePhysicsNode: CCPhysicsNode!
+    weak var coinDeleter: CCNode!
     
     
     func didLoadFromCCB() {
+        gamePhysicsNode.collisionDelegate = self
         multipleTouchEnabled = true
     }
     
@@ -105,11 +107,6 @@ class Gameplay: CCScene {
         reverseBlackHelicopter.moveHelicopter(heliSpeed)
     }
     
-    
-    
-    
-    
-    
     func coinAppear(CPosition: CGPoint) {
         if Enemy.score > 50 {
             var coin = CCBReader.load("Coins") as! Coins
@@ -117,6 +114,11 @@ class Gameplay: CCScene {
             coin.scale = 0.7
             gamePhysicsNode.addChild(coin)
         }
+    }
+    
+    func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, coin: CCNode!, coinDeleter: CCNode!) -> Bool {
+        coin.removeFromParent()
+        return true
     }
     
     var updatedHeliSpeed: Double!
