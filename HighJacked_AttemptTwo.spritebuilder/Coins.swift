@@ -9,5 +9,14 @@
 import Foundation
 
 class Coins: CCSprite {
-       
+    
+    func didLoadFromCCB() {
+        userInteractionEnabled = true
+    }
+    
+    override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
+        removeFromParent()
+        Enemy.score += 10
+    }
+    
 }

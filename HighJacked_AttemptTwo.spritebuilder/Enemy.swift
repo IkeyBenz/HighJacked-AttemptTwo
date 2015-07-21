@@ -8,17 +8,18 @@
 
 import Foundation
 
-class Enemy: CCSprite, CCPhysicsCollisionDelegate {
+class Enemy: CCSprite {
     static var score: Int = 0
     
     func didLoadFromCCB() {
         userInteractionEnabled = true
-        
     }
+    
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         var randomScoreIncrease = arc4random_uniform(5) + 3
         Enemy.score += Int(randomScoreIncrease)
         removeFromParent()
+        
         
         }
 

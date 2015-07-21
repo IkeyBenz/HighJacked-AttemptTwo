@@ -97,6 +97,9 @@
 		C64DCED01B56E88D0041FF1F /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64DCECF1B56E88D0041FF1F /* Gameplay.swift */; };
 		C64DCED81B56EAB40041FF1F /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64DCED71B56EAB40041FF1F /* Enemy.swift */; };
 		C64DCEDA1B57607A0041FF1F /* ReverseHelicopter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64DCED91B57607A0041FF1F /* ReverseHelicopter.swift */; };
+		C652C5641B5E9C7700ED4D33 /* BlackHelicopter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652C5631B5E9C7700ED4D33 /* BlackHelicopter.swift */; };
+		C652C5681B5E9D8A00ED4D33 /* RedNinja.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652C5671B5E9D8A00ED4D33 /* RedNinja.swift */; };
+		C652C56A1B5EBD3B00ED4D33 /* ReverseBlackHelicopter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C652C5691B5EBD3B00ED4D33 /* ReverseBlackHelicopter.swift */; };
 		C65D7F071B5D8053008A4076 /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D7F061B5D8053008A4076 /* Coins.swift */; };
 /* End PBXBuildFile section */
 
@@ -219,6 +222,9 @@
 		C64DCECF1B56E88D0041FF1F /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameplay.swift; sourceTree = "<group>"; };
 		C64DCED71B56EAB40041FF1F /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		C64DCED91B57607A0041FF1F /* ReverseHelicopter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReverseHelicopter.swift; sourceTree = "<group>"; };
+		C652C5631B5E9C7700ED4D33 /* BlackHelicopter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackHelicopter.swift; sourceTree = "<group>"; };
+		C652C5671B5E9D8A00ED4D33 /* RedNinja.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedNinja.swift; sourceTree = "<group>"; };
+		C652C5691B5EBD3B00ED4D33 /* ReverseBlackHelicopter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReverseBlackHelicopter.swift; sourceTree = "<group>"; };
 		C65D7F061B5D8053008A4076 /* Coins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
 		D352B48019EC608A00829775 /* MetalShaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MetalShaders; path = Source/MetalShaders; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -447,6 +453,9 @@
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				C64DCECF1B56E88D0041FF1F /* Gameplay.swift */,
+				C652C5631B5E9C7700ED4D33 /* BlackHelicopter.swift */,
+				C652C5691B5EBD3B00ED4D33 /* ReverseBlackHelicopter.swift */,
+				C652C5671B5E9D8A00ED4D33 /* RedNinja.swift */,
 				C65D7F061B5D8053008A4076 /* Coins.swift */,
 				C64DCED71B56EAB40041FF1F /* Enemy.swift */,
 				C64DCEC91B56E87C0041FF1F /* Helicopter.swift */,
@@ -828,13 +837,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C652C5681B5E9D8A00ED4D33 /* RedNinja.swift in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				C65D7F071B5D8053008A4076 /* Coins.swift in Sources */,
 				C64DCED81B56EAB40041FF1F /* Enemy.swift in Sources */,
 				C64DCECA1B56E87C0041FF1F /* Helicopter.swift in Sources */,
 				C64DCEDA1B57607A0041FF1F /* ReverseHelicopter.swift in Sources */,
+				C652C5641B5E9C7700ED4D33 /* BlackHelicopter.swift in Sources */,
 				C64DCED01B56E88D0041FF1F /* Gameplay.swift in Sources */,
+				C652C56A1B5EBD3B00ED4D33 /* ReverseBlackHelicopter.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

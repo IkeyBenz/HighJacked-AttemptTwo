@@ -13,10 +13,10 @@ class Helicopter: CCSprite {
     
     var move: CCActionMoveTo!
     
-    func moveHelicopter(heliSpeed: Double) {
+    func moveHelicopter(speed: Double) {
         
         var callblock = CCActionCallBlock(block: {self.checkForEnemies()})
-        move = CCActionMoveTo(duration: heliSpeed, position: ccp(CGFloat(-50 - Double(contentSizeInPoints.width) * Double(scale)), position.y))
+        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat(-50 - Double(contentSizeInPoints.width) * Double(scale)), position.y))
         runAction(CCActionSequence(array: [move, callblock]))
         
     }

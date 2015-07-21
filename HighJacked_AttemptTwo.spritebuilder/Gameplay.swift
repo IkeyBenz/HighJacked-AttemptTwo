@@ -8,26 +8,42 @@
 
 import Foundation
 
-class Gameplay: CCScene/*, EnemyDelegate*/ {
+class Gameplay: CCScene {
     
     weak var scoreLabel: CCLabelTTF!
-   
+    weak var gamePhysicsNode: CCPhysicsNode!
     
     
+    func didLoadFromCCB() {
+        multipleTouchEnabled = true
+    }
     
     override func update(delta: CCTime) {
         scoreLabel.string = String(Enemy.score)
-        updatedHeliScale()
-        updatedHeliSpeed()
-        updatedHeliSpawn()
+        updateEverything()
         
         var randomSpawn = arc4random_uniform(1000)
         var randomReverseSpawn = arc4random_uniform(1000)
+        var randomCoinXposition = arc4random_uniform(500) + 20
         
-        if randomSpawn < updatedHeliSpawn() {
-            showHelicopters(updatedHeliScale(), heliSpeed: updatedHeliSpeed())
-        } else if randomReverseSpawn < updatedHeliSpawn() {
-            showReverseHelicopters(updatedHeliScale(), heliSpeed: updatedHeliSpeed())
+        if Enemy.score < 50 {
+            if randomSpawn < updatedSpawnProbability {
+                showHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+            } else if randomReverseSpawn < updatedSpawnProbability {
+                showReverseHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+            }
+        }
+        if Enemy.score >= 50 {
+            if randomSpawn < updatedSpawnProbability {
+                showBlackHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+            } else if randomReverseSpawn < updatedSpawnProbability {
+                showReverseBlackHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+            }
+        }
+        
+        if randomSpawn < 1 {
+            var coinPosition = CGPoint(x: Double(randomCoinXposition), y: 650)
+            coinAppear(coinPosition)
         }
         
         
@@ -37,7 +53,7 @@ class Gameplay: CCScene/*, EnemyDelegate*/ {
         
         println(heliSpeed)
         
-        var helicopter = CCBReader.load("Helicopter") as! Helicopter
+        var helicopter = CCBReader.load("Helicopters/Helicopter") as! Helicopter
         
         var randomHeight = arc4random_uniform(190) + 100
         
@@ -48,13 +64,11 @@ class Gameplay: CCScene/*, EnemyDelegate*/ {
         
         helicopter.moveHelicopter(heliSpeed)
         
-        
     }
     
     func showReverseHelicopters(heliScale: Double, heliSpeed: Double) {
         
-        println("\(heliSpeed) reverse")
-        var reverseHelicopter = CCBReader.load("ReverseHelicopter") as! ReverseHelicopter
+        var reverseHelicopter = CCBReader.load("Helicopters/ReverseHelicopter") as! ReverseHelicopter
         
         var randomHeight = arc4random_uniform(190) + 100
         
@@ -65,65 +79,89 @@ class Gameplay: CCScene/*, EnemyDelegate*/ {
         reverseHelicopter.moveHelicopter(heliSpeed)
     }
     
-    func updatedHeliScale() -> Double {
-        var currentHelicopterScale: Double!
+    
+    
+    func showBlackHelicopters(heliScale: Double, heliSpeed: Double) {
         
-        currentHelicopterScale = 3.0
-        if Enemy.score >= 20 && Enemy.score < 100 {
-            currentHelicopterScale = 2.7
-        } else if Enemy.score >= 100 && Enemy.score < 200 {
-            currentHelicopterScale = 2.5
-        } else if Enemy.score >= 200 && Enemy.score < 300 {
-            currentHelicopterScale = 2
-        } else if Enemy.score >= 300 && Enemy.score < 400 {
-            currentHelicopterScale = 1.7
-        } else if Enemy.score >= 400 && Enemy.score < 450 {
-            currentHelicopterScale = 1.3
-        } else if Enemy.score >= 450 {
-            currentHelicopterScale = 1
-        }
+        var blackHelicopter = CCBReader.load("Helicopters/BlackHelicopter") as! BlackHelicopter
+        var randomHeight = arc4random_uniform(190) + 100
         
-        return currentHelicopterScale
+        blackHelicopter.scale = Float(heliScale)
+        blackHelicopter.position = CGPoint(x: 600, y: CGFloat(randomHeight))
+        addChild(blackHelicopter)
+        
+        blackHelicopter.moveHelicopter(heliSpeed)
     }
     
-    func updatedHeliSpeed() -> Double {
-        var speed: Double!
-        if Enemy.score >= 0 && Enemy.score < 20 {
-            speed = 5
-        }
-        if Enemy.score >= 20 && Enemy.score < 100 {
-            speed = 4.5
-        } else if Enemy.score >= 100 && Enemy.score < 200 {
-            speed = 4.2
-        } else if Enemy.score >= 200 && Enemy.score < 300 {
-            speed = 4
-        } else if Enemy.score >= 300 && Enemy.score < 400 {
-            speed = 3.7
-        } else if Enemy.score >= 400 && Enemy.score < 450 {
-            speed = 3.2
-        } else if Enemy.score >= 450 {
-            speed = 3
-        }
-        return speed
-    }
-    
-    func updatedHeliSpawn() -> UInt32 {
-        var randomSpawnProbability: UInt32 = 5
-        if Enemy.score >= 20 && Enemy.score < 100 {
-            randomSpawnProbability = 7
-        } else if Enemy.score >= 100 && Enemy.score < 200 {
-            randomSpawnProbability = 7
-        } else if Enemy.score >= 200 && Enemy.score < 300 {
-            randomSpawnProbability = 8
-        } else if Enemy.score >= 300 && Enemy.score < 400 {
-            randomSpawnProbability = 9
-        } else if Enemy.score >= 400 && Enemy.score < 450 {
-            randomSpawnProbability = 10
-        } else if Enemy.score >= 450 {
-            randomSpawnProbability = 11
-        }
+    func showReverseBlackHelicopters(heliScale: Double, heliSpeed: Double) {
         
-        return randomSpawnProbability
+        var reverseBlackHelicopter = CCBReader.load("Helicopters/ReverseBlackHelicopter") as! ReverseBlackHelicopter
+        var randomHeight = arc4random_uniform(190) + 100
+        
+        reverseBlackHelicopter.scale = Float(heliScale)
+        reverseBlackHelicopter.position = CGPoint(x: -100, y: CGFloat(randomHeight))
+        addChild(reverseBlackHelicopter)
+        
+        reverseBlackHelicopter.moveHelicopter(heliSpeed)
     }
     
+    
+    
+    
+    
+    
+    func coinAppear(CPosition: CGPoint) {
+        if Enemy.score > 50 {
+            var coin = CCBReader.load("Coins") as! Coins
+            coin.position = CPosition
+            coin.scale = 0.7
+            gamePhysicsNode.addChild(coin)
+        }
+    }
+    
+    var updatedHeliSpeed: Double!
+    var updatedHeliScale: Double!
+    var updatedSpawnProbability: UInt32!
+    
+    func updateEverything() {
+        if Enemy.score < 20 {
+            
+            updatedHeliSpeed = 5
+            updatedHeliScale = 3.0
+            updatedSpawnProbability = 5
+            
+        } else if Enemy.score >= 20 && Enemy.score < 100 {
+            
+            updatedHeliSpeed = 4.5
+            updatedHeliScale = 2.5
+            updatedSpawnProbability = 6
+
+        } else if Enemy.score >= 100 && Enemy.score < 200 {
+            
+            updatedHeliSpeed = 4.3
+            updatedHeliScale = 2.2
+            updatedSpawnProbability = 7
+
+        } else if Enemy.score >= 200 && Enemy.score < 300 {
+            
+            updatedHeliSpeed = 4.0
+            updatedHeliScale = 2.0
+            updatedSpawnProbability = 8
+
+        } else if Enemy.score >= 300 && Enemy.score < 450 {
+            
+            updatedHeliSpeed = 3.7
+            updatedHeliScale = 1.7
+            updatedSpawnProbability = 9
+
+        } else if Enemy.score >= 450 {
+            
+            updatedHeliSpeed = 3.5
+            updatedHeliScale = 1.5
+            updatedSpawnProbability = 11
+            
+        }
+    }
+    
+
 }
