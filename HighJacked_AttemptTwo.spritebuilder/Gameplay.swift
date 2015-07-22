@@ -25,25 +25,26 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
         updateEverything()
         
         var randomSpawn = arc4random_uniform(1000)
+        var randomBlackSpawn = arc4random_uniform(1000)
         var randomReverseSpawn = arc4random_uniform(1000)
+        var randomReverseBlackSpawn = arc4random_uniform(1000)
         var randomCoinXposition = arc4random_uniform(500) + 20
         
-        if Enemy.score < 50 {
-            if randomSpawn < updatedSpawnProbability {
-                showHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
-            } else if randomReverseSpawn < updatedSpawnProbability {
-                showReverseHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
-            }
-        }
-        if Enemy.score >= 50 {
-            if randomSpawn < updatedSpawnProbability {
-                showBlackHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
-            } else if randomReverseSpawn < updatedSpawnProbability {
-                showReverseBlackHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
-            }
+        
+        if randomSpawn < updatedSpawnProbability {
+            showHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+        } else if randomReverseSpawn < updatedSpawnProbability {
+            showReverseHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
         }
         
-        if randomSpawn < 1 {
+        if randomBlackSpawn < updatedBlackSpawnProbability {
+            showBlackHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+        } else if randomReverseSpawn < updatedBlackSpawnProbability {
+            showReverseBlackHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
+        }
+        
+        
+        if randomBlackSpawn < updatedCoinSpawnProbability {
             var coinPosition = CGPoint(x: Double(randomCoinXposition), y: 650)
             coinAppear(coinPosition)
         }
@@ -124,6 +125,8 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
     var updatedHeliSpeed: Double!
     var updatedHeliScale: Double!
     var updatedSpawnProbability: UInt32!
+    var updatedCoinSpawnProbability: UInt32!
+    var updatedBlackSpawnProbability: UInt32!
     
     func updateEverything() {
         if Enemy.score < 20 {
@@ -131,39 +134,60 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
             updatedHeliSpeed = 5
             updatedHeliScale = 3.0
             updatedSpawnProbability = 5
+            updatedCoinSpawnProbability = 1
+            updatedBlackSpawnProbability = 0
             
         } else if Enemy.score >= 20 && Enemy.score < 100 {
             
             updatedHeliSpeed = 4.5
             updatedHeliScale = 2.5
             updatedSpawnProbability = 6
-
-        } else if Enemy.score >= 100 && Enemy.score < 200 {
+            updatedCoinSpawnProbability = 1
+            updatedBlackSpawnProbability = 0
+            
+        } else if Enemy.score >= 100 && Enemy.score < 150 {
             
             updatedHeliSpeed = 4.3
             updatedHeliScale = 2.2
-            updatedSpawnProbability = 7
-
+            updatedSpawnProbability = 6
+            updatedCoinSpawnProbability = 2
+            updatedBlackSpawnProbability = 1
+            
+        } else if Enemy.score >= 150 && Enemy.score < 200 {
+            
+            updatedHeliSpeed = 4.15
+            updatedHeliScale = 2.2
+            updatedSpawnProbability = 4
+            updatedCoinSpawnProbability = 2
+            updatedBlackSpawnProbability = 2
+            
+            
         } else if Enemy.score >= 200 && Enemy.score < 300 {
             
             updatedHeliSpeed = 4.0
             updatedHeliScale = 2.0
-            updatedSpawnProbability = 8
-
+            updatedSpawnProbability = 3
+            updatedCoinSpawnProbability = 3
+            updatedBlackSpawnProbability = 4
+            
         } else if Enemy.score >= 300 && Enemy.score < 450 {
             
             updatedHeliSpeed = 3.7
             updatedHeliScale = 1.7
-            updatedSpawnProbability = 9
-
+            updatedSpawnProbability = 1
+            updatedCoinSpawnProbability = 4
+            updatedBlackSpawnProbability = 6
+            
         } else if Enemy.score >= 450 {
             
             updatedHeliSpeed = 3.5
             updatedHeliScale = 1.5
-            updatedSpawnProbability = 11
+            updatedSpawnProbability = 0
+            updatedCoinSpawnProbability = 5
+            updatedBlackSpawnProbability = 11
             
         }
     }
     
-
+    
 }

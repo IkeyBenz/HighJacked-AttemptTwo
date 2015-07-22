@@ -16,7 +16,7 @@ class Enemy: CCSprite {
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
-        var randomScoreIncrease = arc4random_uniform(5) + 3
+        var randomScoreIncrease = arc4random_uniform(5) + 2
         Enemy.score += Int(randomScoreIncrease)
         removeFromParent()
         
