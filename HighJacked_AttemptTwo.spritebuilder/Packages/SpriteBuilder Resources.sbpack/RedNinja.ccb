@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -44,7 +44,7 @@
 				<integer>3</integer>
 				<key>animatedProperties</key>
 				<dict>
-					<key>0</key>
+					<key>2</key>
 					<dict>
 						<key>visible</key>
 						<dict>
@@ -134,7 +134,7 @@
 				<array>
 					<dict>
 						<key>baseValue</key>
-						<integer>1</integer>
+						<false/>
 						<key>name</key>
 						<string>visible</string>
 						<key>type</key>
@@ -182,8 +182,8 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.20532582700252533</real>
-							<real>0.20532582700252533</real>
+							<real>0.16174094378948212</real>
+							<real>0.16174094378948212</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -411,6 +411,8 @@
 						<string>ccbResources/ccbParticleFire.png</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -562,21 +564,21 @@
 				<integer>12</integer>
 			</dict>
 			<key>chainedSequenceId</key>
-			<integer>0</integer>
+			<integer>-1</integer>
 			<key>length</key>
-			<real>0.20000000298023224</real>
+			<real>10</real>
 			<key>name</key>
-			<string>Default Timeline</string>
+			<string>Untitled Timeline</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.13333334028720856</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>512</real>
+			<real>128</real>
 			<key>sequenceId</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>soundChannel</key>
 			<dict>
 				<key>isExpanded</key>
@@ -598,11 +600,11 @@
 				<integer>12</integer>
 			</dict>
 			<key>chainedSequenceId</key>
-			<integer>-1</integer>
+			<integer>2</integer>
 			<key>length</key>
-			<real>10</real>
+			<real>0.20000000298023224</real>
 			<key>name</key>
-			<string>shot</string>
+			<string>Shooting</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
@@ -610,9 +612,9 @@
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
-			<real>128</real>
+			<real>512</real>
 			<key>sequenceId</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>soundChannel</key>
 			<dict>
 				<key>isExpanded</key>

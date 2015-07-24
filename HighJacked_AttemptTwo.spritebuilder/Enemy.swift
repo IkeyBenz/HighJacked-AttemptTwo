@@ -10,6 +10,8 @@ import Foundation
 
 class Enemy: CCSprite {
     static var score: Int = 0
+    var isShooting: Bool = false
+    var wasKilled: Bool = false
     
     func didLoadFromCCB() {
         userInteractionEnabled = true
@@ -18,10 +20,11 @@ class Enemy: CCSprite {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         var randomScoreIncrease = arc4random_uniform(5) + 2
         Enemy.score += Int(randomScoreIncrease)
+        self.isShooting = false
+        self.wasKilled = true
+//        println("Killed enemy's isShooting = \(self.isShooting)")
         removeFromParent()
-        
-        
-        }
-
+    }
+    
 }
 

@@ -252,7 +252,7 @@
 				<key>displayName</key>
 				<string>Enemy</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>enemy</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -301,8 +301,6 @@
 						<string>Enemy.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -405,6 +403,8 @@
 				<array/>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

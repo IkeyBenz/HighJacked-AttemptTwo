@@ -64,7 +64,7 @@
 									<integer>4</integer>
 									<key>value</key>
 									<array>
-										<real>0.13296058773994446</real>
+										<real>0.1550000011920929</real>
 										<real>0.12296043336391449</real>
 									</array>
 								</dict>
@@ -153,7 +153,7 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>0.13296058773994446</real>
+							<real>0.1550000011920929</real>
 							<real>0.12296043336391449</real>
 							<false/>
 							<integer>0</integer>
@@ -203,6 +203,8 @@
 						<array/>
 					</dict>
 				</array>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -214,9 +216,9 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCBFile</string>
+				<string>RedNinja</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>enemy</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -275,6 +277,71 @@
 		<string></string>
 		<key>memberVarAssignmentType</key>
 		<integer>1</integer>
+		<key>physicsBody</key>
+		<dict>
+			<key>affectedByGravity</key>
+			<true/>
+			<key>allowsRotation</key>
+			<true/>
+			<key>bodyShape</key>
+			<integer>0</integer>
+			<key>collisionCategories</key>
+			<array/>
+			<key>collisionMask</key>
+			<array/>
+			<key>collisionType</key>
+			<string>blackHelicopter</string>
+			<key>cornerRadius</key>
+			<real>0.0</real>
+			<key>density</key>
+			<real>1</real>
+			<key>dynamic</key>
+			<false/>
+			<key>elasticity</key>
+			<real>0.30000001192092896</real>
+			<key>friction</key>
+			<real>0.30000001192092896</real>
+			<key>points</key>
+			<array>
+				<array>
+					<real>0.0</real>
+					<real>0.0</real>
+				</array>
+				<array>
+					<real>0.0</real>
+					<real>48</real>
+				</array>
+				<array>
+					<real>149</real>
+					<real>48</real>
+				</array>
+				<array>
+					<real>149</real>
+					<real>0.0</real>
+				</array>
+			</array>
+			<key>polygons</key>
+			<array>
+				<array>
+					<array>
+						<real>149</real>
+						<real>0.0</real>
+					</array>
+					<array>
+						<real>149</real>
+						<real>48</real>
+					</array>
+					<array>
+						<real>0.0</real>
+						<real>48</real>
+					</array>
+					<array>
+						<real>0.0</real>
+						<real>0.0</real>
+					</array>
+				</array>
+			</array>
+		</dict>
 		<key>properties</key>
 		<array>
 			<dict>

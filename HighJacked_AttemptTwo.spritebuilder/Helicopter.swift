@@ -9,34 +9,57 @@
 import Foundation
 
 class Helicopter: CCSprite {
-
     
+    weak var enemy: Enemy!
     var move: CCActionMoveTo!
+    var alreadyMoved: Bool = false
     
     func moveHelicopter(speed: Double) {
-        
-        var callblock = CCActionCallBlock(block: {self.checkForEnemies()})
-        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat(-50 - Double(contentSizeInPoints.width) * Double(scale)), position.y))
-        runAction(CCActionSequence(array: [move, callblock]))
-        
-    }
-    func checkForEnemies() {
-        var doesHaveEnemies: Bool!
-        if children.count > 1 {
-            triggerGameOver()
-        } else {
-            removeFromParent()
+        var callblock = CCActionCallBlock(block: {self.setAlreadyMovedBoolean()})
+        var delay = CCActionDelay(duration: speed)
+      //  var callblock = CCActionCallBlock(block: {self.checkForEnemies()})
+        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat((Double(contentSizeInPoints.width) * Double(scale)) - 100), position.y))
+        runAction(CCActionSequence(array: [move, delay, callblock]))
         }
+    
+    func setAlreadyMovedBoolean() {
+        alreadyMoved = true
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    func checkForEnemies() {
+//        var doesHaveEnemies: Bool!
+//        if children.count > 1 {
+//            enemy.wasKilled = true
+//            enemy.isShooting = false
+//            Gameplay.life -= Float(100)
+//            removeFromParent()
+//            
+//            
+//            
+//            if Gameplay.life == 0 {
+//                Gameplay.triggerGameOver())
+//            }
+//        } else {
+//            removeFromParent()
+//        }
+//    }
+//    
 
-    }
     
-    func triggerGameOver() {
-        Enemy.score = 0
-        self.stopAllActions()
-        CCDirector.sharedDirector().presentScene(CCBReader.loadAsScene("MainScene"))
-    }
     
-   
     
     
 }
