@@ -10,8 +10,6 @@ import Foundation
 import AudioToolbox
 import AVFoundation
 
-var GAMEPLAY: CCScene!
-
 
 class Gameplay: CCScene, CCPhysicsCollisionDelegate {
     
@@ -27,6 +25,12 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
     let defaults = NSUserDefaults.standardUserDefaults()
     var helicopters: [Helicopter!] = []
     
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.string = "\(score)"
+        }
+    }
+    
     
     static var life: Float = 400 {
         didSet{
@@ -34,20 +38,18 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
             
         }
     }
-
+    
     
     
     func didLoadFromCCB() {
-        GAMEPLAY = self
-        GAMEOVER = false
         gamePhysicsNode.collisionDelegate = self
         multipleTouchEnabled = true
     }
     
     override func update(delta: CCTime) {
+        
         gameOver()
-        IsEnemyInHelicopter()
-        scoreLabel.string = String(Enemy.score)
+        
         
         playerScoreLabel.string = "Your Score: \(Enemy.score)"
         var currentHighscore = defaults.integerForKey("highScore")
@@ -66,8 +68,11 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
         var randomReverseBlackSpawn = arc4random_uniform(1000)
         var randomCoinXposition = arc4random_uniform(500) + 20
         
-        if !GAMEOVER {
-            updateEverything()
+        updateEverything()
+        
+        if !gameOver() {
+            IsEnemyInHelicopter()
+            
             if randomSpawn < updatedSpawnProbability {
                 showHelicopters(updatedHeliScale, heliSpeed: updatedHeliSpeed)
             } else if randomReverseSpawn < updatedSpawnProbability {
@@ -94,6 +99,7 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
     func showHelicopters(heliScale: Double, heliSpeed: Double) {
         
         var helicopter = CCBReader.load("Helicopters/Helicopter") as! Helicopter
+        helicopter.enemy.delegate = self
         var randomHeight = arc4random_uniform(190) + 100
         
         helicopter.scale = Float(heliScale)
@@ -176,19 +182,19 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
         return true
     }
     
-//    func vibrateAndShoot(currentHelicopter: Helicopter!) {
-//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-//                if currentHelicopter.enemy.wasKilled == false {
-//                    while currentHelicopter.enemy.isShooting {
-//                        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-//                        Gameplay.life -= 0.02
-//                    }
-//                }
-//            }
-//    }
-
+    //    func vibrateAndShoot(currentHelicopter: Helicopter!) {
+    //                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    //                if currentHelicopter.enemy.wasKilled == false {
+    //                    while currentHelicopter.enemy.isShooting {
+    //                        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+    //                        Gameplay.life -= 0.02
+    //                    }
+    //                }
+    //            }
+    //    }
     
-
+    
+    
     
     
     
@@ -275,17 +281,27 @@ class Gameplay: CCScene, CCPhysicsCollisionDelegate {
         }
     }
     
-    func gameOver() {
+    func gameOver() -> Bool {
+        
         if Gameplay.life <= 0 {
             for helicopter in helicopters {
                 helicopter.removeFromParent()
             }
+            helicopters = []
             stopAllActions()
             animationManager.runAnimationsForSequenceNamed("Game Over Label")
+            return true
         }
+        return false
     }
     
     
 }
 
+
+extension Gameplay: EnemyDelegate{
+    func enemyKilled(score: Int) {
+        self.score += score
+    }
+}
 

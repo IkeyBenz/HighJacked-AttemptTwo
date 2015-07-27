@@ -14,12 +14,13 @@ class ReverseHelicopter: Helicopter {
     var screenWidth = UIScreen.mainScreen().bounds.width
     
     override func moveHelicopter(speed: Double) {
+        var callblock = CCActionCallBlock(block: {self.setAlreadyMovedBoolean()})
         var delay = CCActionDelay(duration: speed)
      //   var callblock = CCActionCallBlock(block: {self.checkForEnemies()})
-        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat((Double(screenWidth) + Double(contentSizeInPoints.width / 2) * Double(scale))) - 100, position.y))
-        runAction(CCActionSequence(array: [move, delay]))
+        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat(Double(screenWidth) + Double(contentSizeInPoints.width / 2) * Double(scale)), position.y))
+        runAction(CCActionSequence(array: [move, callblock]))
         
-        alreadyMoved = true
+        
     }
 
     

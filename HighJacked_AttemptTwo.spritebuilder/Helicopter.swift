@@ -9,18 +9,40 @@
 import Foundation
 
 class Helicopter: CCSprite {
+    var randomHeight = arc4random_uniform(190) + 100
+    enum Side {
+        case Left, Right
+    }
+    var state: Side! {
+        didSet {
+            if state == .Left {
+                flipX = true
+                position = ccp(CGFloat(Double(-contentSize.width) / 2 * Double(scale), Double(randomHeight)))
+            } else if state == .Right {
+                
+            }
+            
+        }
+    }
+    
+    func setStuff() {
+        
+    }
+    
+    
+    
     
     weak var enemy: Enemy!
     var move: CCActionMoveTo!
     var alreadyMoved: Bool = false
     
     func moveHelicopter(speed: Double) {
-        var callblock = CCActionCallBlock(block: {self.setAlreadyMovedBoolean()})
+        var callblock = CCActionCallBlock(block: {self.alreadyMoved = true})
         var delay = CCActionDelay(duration: speed)
       //  var callblock = CCActionCallBlock(block: {self.checkForEnemies()})
-        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat((Double(contentSizeInPoints.width) * Double(scale)) - 100), position.y))
-        runAction(CCActionSequence(array: [move, delay, callblock]))
-        }
+        move = CCActionMoveTo(duration: speed, position: ccp(CGFloat(-Double(contentSizeInPoints.width) * 0.5 * Double(scale)), position.y))
+        runAction(CCActionSequence(array: [move, callblock]))
+    }
     
     func setAlreadyMovedBoolean() {
         alreadyMoved = true
